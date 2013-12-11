@@ -1,3 +1,4 @@
 [submodule "openstack-ansible-modules"]
 	path = openstack-ansible-modules
 	url = git://github.com/kili/openstack-ansible-modules.git
+  branch = stable/havana
