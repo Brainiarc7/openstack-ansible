@@ -19,9 +19,16 @@ You'll need to install:
  * [python-netaddr](https://pypi.python.org/pypi/netaddr/)
     this is used to match ip addresses and interfaces to networks.
 
-The simplest way to get started with Ansible is to install the prerequisites,
-grab the git repo and source the appropriate file to set your environment
-variables, no other installation is required:
+On a Mac:
+
+ * Install the latest Vagrant dmg (http://downloads.vagrantup.com/)
+ * Install Homebrew (http://brew.sh/)
+ * Install Ansible: `brew install ansible`
+ * Install the python libraries: `pip install python-novaclient python-netaddr`
+
+The simplest way to get started with Ansible on other platforms is to install 
+the prerequisites, grab the git repo and source the appropriate file to set 
+your environment variables, no other installation is required:
 
 	sudo pip install paramiko PyYAML Jinja2
 	git clone git://github.com/ansible/ansible.git
@@ -50,16 +57,6 @@ OpenStack, so there's an extra command required after cloning the repo:
 This will boot three VMs (controller, network, and a compute node), install
 OpenStack, and attempt to boot a test VM inside of OpenStack.
 
-If everything works, you should be able to ssh to the instance from the
-network host:
-
- * username: `cirros`
- * password: `cubswin:)`
-
-Note: You may get a "connection refused" when attempting to ssh to the instance.
-It can take several minutes for the ssh server to respond to requests, even
-though the cirros instance has booted and is pingable.
-
 ## Vagrant hosts
 
 The hosts for the standard configuration are:
@@ -71,11 +68,21 @@ The hosts for the standard configuration are:
 
 You should be able to ssh to these VMs (username: `vagrant`, password:
 `vagrant`). You can also authenticate  with the vagrant private key, which is
-included here as the file `vagrant_private_key` (NOTE: git does not manage file
-permissions, these must be set to using "chmod 0600 vagrant_private_key" or ssh
-and ansible will fail with an error).
+included here as the file `vagrant_private_key` (NOTE: the make command runs 
+"chmod 0600 vagrant_private_key" but you may need to do it manually if ssh or ansible 
+fail with an error).
 
+## Compute Node
 
+If everything works, you should also be able to ssh to the compute node from the
+network host:
+
+ * username: `cirros`
+ * password: `cubswin:)`
+
+Note: You may get a "connection refused" when attempting to ssh to the instance.
+It can take several minutes for the ssh server to respond to requests, even
+though the cirros instance has booted and is pingable.
 
 ## Interacting with your cloud
 
