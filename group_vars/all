@@ -1,4 +1,7 @@
 ---
+# set this either to grizzly or havana
+openstack_version: grizzly
+
 external_ntp_host: pool.ntp.org
 
 default_region: RegionOne

@@ -26,12 +26,21 @@
         repo: deb http://ubuntu-cloud.archive.canonical.com/ubuntu precise-updates/havana main
         state: present
         update_cache: yes
+      when: openstack_version.lower() == "havana"
 
     - name: ensure precise backport repo is present (for ovs)
       apt_repository:
         repo: ppa:lykoz/precise-backports
         state: present
         update_cache: yes
+      when: openstack_version.lower() == "havana"
+
+    - name: ensure havana repository is present
+      apt_repository: 
+        repo: deb http://ubuntu-cloud.archive.canonical.com/ubuntu precise-updates/grizzly main
+        state: present
+        update_cache: yes
+      when: openstack_version.lower() == "grizzly"
 
     - name: upgrade software packages to latest version
       apt: upgrade=yes
