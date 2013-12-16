@@ -35,7 +35,7 @@
         update_cache: yes
       when: openstack_version.lower() == "havana"
 
-    - name: ensure havana repository is present
+    - name: ensure grizzly repository is present
       apt_repository: 
         repo: deb http://ubuntu-cloud.archive.canonical.com/ubuntu precise-updates/grizzly main
         state: present
