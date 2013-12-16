@@ -19,13 +19,13 @@
 #                                                                             #
 # now it's easy to switch between the different versions of openstack:        #
 # openstack_version_switch.sh havana savestate;                               #
-# openstack_version_switch.sh grizzly resume;                                 #
+# openstack_version_switch.sh grizzly startvm;                                #
 # openstack_version_switch.sh grizzly savestate;                              #
-# openstack_version_switch.sh havana resume;                                  #
+# openstack_version_switch.sh havana startvm;                                 #
 #-----------------------------------------------------------------------------#
 
 help() {
-  echo "vbox_control.sh <havana|grizzly> <savestate|resume>"
+  echo "vbox_control.sh <havana|grizzly> <savestate|startvm>"
   exit 1
 }
 
@@ -34,7 +34,7 @@ then
   help
 fi
 
-if [[ "${2}" != "savestate" && "${2}" != "resume" ]]
+if [[ "${2}" != "savestate" && "${2}" != "startvm" ]]
 then
   help
 fi
@@ -43,7 +43,14 @@ VMS="_controller _network _storage _compute"
 
 for i in ${VMS}
 do
-  CMD="VBoxManage controlvm ${1}${i} ${2}"
+  if [ "${2}" == "savestate" ]
+  then
+    CMD="VBoxManage controlvm ${1}${i} savestate"
+  fi
+  if [ "${2}" == "startvm" ]
+  then
+    CMD="VBoxManage startvm ${1}${i} --type headless"
+  fi
   echo ${CMD}
   ${CMD}
 done
