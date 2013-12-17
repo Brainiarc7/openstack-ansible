@@ -25,7 +25,7 @@
 
     - name: update memcached.conf from template
       template:
-        src: templates/etc/memcached.conf
+        src: templates/{{ openstack_version }}/etc/memcached.conf
         dest: /etc/memcached.conf
         owner: root
         group: root
@@ -33,7 +33,7 @@
 
     - name: update local_settings.py from template
       template:
-        src: templates/etc/openstack-dashboard/local_settings.py
+        src: templates/{{ openstack_version }}/etc/openstack-dashboard/local_settings.py
         dest: /etc/openstack-dashboard/local_settings.py
         owner: root
         group: root
