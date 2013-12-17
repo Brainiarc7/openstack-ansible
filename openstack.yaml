@@ -1,11 +1,9 @@
 - include: services/common/main.yaml
-#- include: services/keystone/main.yaml
-#- include: services/swift/main.yaml
-#- include: services/glance/main.yaml
-- include: services/quantum/main.yaml
-  when: openstack_version.lower() == "grizzly"
+- include: services/keystone/main.yaml
+- include: services/swift/main.yaml
+- include: services/glance/main.yaml
+#- include: services/quantum/main.yaml
 - include: services/neutron/main.yaml
-  when: openstack_version.lower() == "havana"
 #- include: services/cinder/main.yaml
 - include: services/nova/main.yaml
 - include: services/horizon/main.yaml

@@ -44,6 +44,11 @@ quantum_internal_url: http://{{ quantum_endpoint_host }}:9696
 quantum_admin_url: "{{ quantum_internal_url }}"
 quantum_public_url: http://{{ hostvars[groups['quantum-api'][0]]|find_ip(api_network) }}:9696
 
+neutron_endpoint_host: "{{ hostvars[groups['neutron-api'][0]]|find_ip(management_network) }}"
+neutron_internal_url: http://{{ neutron_endpoint_host }}:9696
+neutron_admin_url: "{{ neutron_internal_url }}"
+neutron_public_url: http://{{ hostvars[groups['neutron-api'][0]]|find_ip(api_network) }}:9696
+
 swift_endpoint_host: "{{ hostvars[groups['swift-proxy'][0]]|find_ip(management_network) }}"
 swift_internal_url: http://{{ swift_endpoint_host }}:8888/v1/AUTH_%(tenant_id)s
 swift_admin_url: http://{{ swift_endpoint_host }}:8888/v1

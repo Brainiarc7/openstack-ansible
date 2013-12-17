@@ -8,6 +8,10 @@ external_ntp_host = uk.pool.ntp.org
 data_network = 10.3.0.0/16
 external_network = 10.4.0.0/16
 
+[neutron:vars]
+data_network = 10.3.0.0/16
+external_network = 10.4.0.0/16
+
 [swift:vars]
 storage_network = 10.5.0.0/16
 
@@ -45,6 +49,17 @@ nova-compute
 controller ansible_ssh_host=10.1.0.2
 
 [quantum-network]
+network ansible_ssh_host=10.1.0.4
+
+[neutron:children]
+neutron-api
+neutron-network
+nova-compute
+
+[neutron-api]
+controller ansible_ssh_host=10.1.0.2
+
+[neutron-network]
 network ansible_ssh_host=10.1.0.4
 
 [swift:children]

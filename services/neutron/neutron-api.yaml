@@ -1,0 +1,51 @@
+---
+- name: Configure neutron-api server
+  hosts: neutron-api
+  sudo: True
+  gather_facts: True
+  tasks:
+
+    - name: ensure neutron-api packages are installed
+      apt: 
+        pkg: neutron-server 
+        state: latest 
+        update_cache: yes 
+        cache_valid_time: 600
+
+    - name: ensure services are stopped
+      service: 
+        name: neutron-server 
+        state: stopped
+
+    - name: ensure neutron sqlite is deleted
+      file: 
+        dest: /var/lib/neutron/neutron.sqlite 
+        state: absent
+
+    - name: update neutron.conf from template
+      template: 
+        src: templates/etc/neutron/neutron.conf 
+        dest: /etc/neutron/neutron.conf 
+        owner: neutron 
+        group: neutron 
+        mode: 0600
+
+    - name: update ovs_neutron_plugin.ini from template
+      template: 
+        src: templates/etc/neutron/plugins/openvswitch/ovs_neutron_plugin.ini 
+        dest: /etc/neutron/plugins/openvswitch/ovs_neutron_plugin.ini 
+        owner: neutron 
+        group: neutron 
+        mode: 0600
+
+    - name: make sure symlink to ovs_neutron_plugin.ini exists
+      file: 
+        src: /etc/neutron/plugins/openvswitch/ovs_neutron_plugin.ini 
+        dest: /etc/neutron/plugin.ini 
+        state: link
+
+    - name: ensure neutron-api services are started and enabled
+      service: 
+        name: neutron-server 
+        state: started 
+        enabled: yes

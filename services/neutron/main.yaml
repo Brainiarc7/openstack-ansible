@@ -1,0 +1,6 @@
+---
+- include: mysql.yaml
+- include: openvswitch.yaml
+- include: neutron-network.yaml
+- include: neutron-api.yaml
+- include: keystone.yaml
