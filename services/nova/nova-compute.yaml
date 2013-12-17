@@ -1,6 +1,6 @@
 ---
 - name: gather needed facts for template
-  hosts: mysql:rabbitmq:keystone:glance:quantum-api:nova-controller
+  hosts: mysql:rabbitmq:keystone:glance:neutron-api:nova-controller
 
 - name: Install nova compute on nodes
   hosts: nova-compute

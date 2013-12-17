@@ -24,7 +24,7 @@
 
     - name: update neutron.conf from template
       template: 
-        src: templates/etc/neutron/neutron.conf 
+        src: templates/{{ openstack_version }}/etc/neutron/neutron.conf 
         dest: /etc/neutron/neutron.conf 
         owner: neutron 
         group: neutron 
@@ -32,7 +32,7 @@
 
     - name: update ovs_neutron_plugin.ini from template
       template: 
-        src: templates/etc/neutron/plugins/openvswitch/ovs_neutron_plugin.ini 
+        src: templates/{{ openstack_version }}/etc/neutron/plugins/openvswitch/ovs_neutron_plugin.ini 
         dest: /etc/neutron/plugins/openvswitch/ovs_neutron_plugin.ini 
         owner: neutron 
         group: neutron 

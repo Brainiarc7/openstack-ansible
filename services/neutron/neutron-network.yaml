@@ -7,7 +7,7 @@
 
     - name: ensure iptables configuration is present
       template: 
-        src: templates/etc/iptables.rules 
+        src: templates/{{ openstack_version }}/etc/iptables.rules 
         dest: /etc/iptables.rules 
         owner: root 
         group: root 
@@ -18,7 +18,7 @@
 
     - name: ensure iptables configuration is loaded at boot
       template: 
-        src: templates/etc/network/if-pre-up.d/iptablesload 
+        src: templates/{{ openstack_version }}/etc/network/if-pre-up.d/iptablesload 
         dest: /etc/network/if-pre-up.d/iptablesload 
         owner: root 
         group: root 
@@ -26,7 +26,7 @@
 
     - name: ensure script to configure network is in place
       template: 
-        src: templates/etc/network/if-pre-up.d/configure_br-ex
+        src: templates/{{ openstack_version }}/etc/network/if-pre-up.d/configure_br-ex
         dest: /etc/network/if-pre-up.d/configure_br-ex
         owner: root 
         group: root 
@@ -70,7 +70,7 @@
 
     - name: update neutron.conf from template
       template: 
-        src: templates/etc/neutron/neutron.conf 
+        src: templates/{{ openstack_version }}/etc/neutron/neutron.conf 
         dest: /etc/neutron/neutron.conf 
         owner: neutron 
         group: neutron 
@@ -78,7 +78,7 @@
 
     - name: update dhcp_agent.ini from template
       template: 
-        src: templates/etc/neutron/dhcp_agent.ini 
+        src: templates/{{ openstack_version }}/etc/neutron/dhcp_agent.ini 
         dest: /etc/neutron/dhcp_agent.ini 
         owner: neutron 
         group: neutron 
@@ -86,7 +86,7 @@
 
     - name: update metadata_agent.ini from template
       template: 
-        src: templates/etc/neutron/metadata_agent.ini 
+        src: templates/{{ openstack_version }}/etc/neutron/metadata_agent.ini 
         dest: /etc/neutron/metadata_agent.ini 
         owner: neutron 
         group: neutron 
