@@ -31,7 +31,7 @@
         update_cache: yes 
         cache_valid_time: 600
       sudo: True
-      when: {{ openstack_version }} == "grizzly"
+      when: openstack_version.lower() == "grizzly"
 
     - name: ensure neutron clients is installed
       apt: 
@@ -40,7 +40,7 @@
         update_cache: yes 
         cache_valid_time: 600
       sudo: True
-      when: {{ openstack_version }} == "havana"
+      when: openstack_version.lower() == "havana"
 
     - name: update openrc template
       template: 
