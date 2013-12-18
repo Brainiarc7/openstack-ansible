@@ -45,7 +45,7 @@
 
     - name: update nova.conf from template
       template: 
-        src: templates/etc/nova/nova.conf 
+        src: templates/{{ openstack_version }}/etc/nova/nova.conf 
         dest: /etc/nova/nova.conf 
         owner: nova 
         group: nova 
@@ -53,7 +53,7 @@
 
     - name: update api-paste.ini from template
       template: 
-        src: templates/etc/nova/api-paste.ini 
+        src: templates/{{ openstack_version }}/etc/nova/api-paste.ini 
         dest: /etc/nova/api-paste.ini 
         owner: nova 
         group: nova 
