@@ -40,6 +40,10 @@ controller ansible_ssh_host=10.1.0.2
 [nova-compute]
 compute ansible_ssh_host=10.1.0.3
 
+[network-service-api:children]
+quantum-api
+neutron-api
+
 [quantum:children]
 quantum-api
 quantum-network

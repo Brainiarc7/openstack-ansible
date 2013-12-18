@@ -21,9 +21,26 @@
         - python-keystoneclient
         - python-swiftclient
         - python-glanceclient
-        - python-quantumclient
         - python-cinderclient
         - python-novaclient
+
+    - name: ensure quantum client is installed
+      apt: 
+        pkg: python-quantumclient
+        state: latest 
+        update_cache: yes 
+        cache_valid_time: 600
+      sudo: True
+      when: {{ openstack_version }} == "grizzly"
+
+    - name: ensure neutron clients is installed
+      apt: 
+        pkg: python-neutronclient
+        state: latest 
+        update_cache: yes 
+        cache_valid_time: 600
+      sudo: True
+      when: {{ openstack_version }} == "havana"
 
     - name: update openrc template
       template: 
