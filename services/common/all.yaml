@@ -5,9 +5,11 @@
   gather_facts: True
   tasks:
 
-    - name: update apt cache
-      apt: 
-        update_cache: yes
+    - shell: echo "I'm on grizzly"
+      when: openstack_version == "grizzly"
+
+    - shell: echo "I'm on havana"
+      when: openstack_version == "havana"
 
     - name: ensure required base packages are present
       apt: 
@@ -19,28 +21,35 @@
         - ntp
         - python-mysqldb
         - python-software-properties
-        - ubuntu-cloud-keyring
+        - python-pycurl
 
     - name: ensure havana repository is present
       apt_repository: 
         repo: deb http://ubuntu-cloud.archive.canonical.com/ubuntu precise-updates/havana main
         state: present
         update_cache: yes
-      when: openstack_version.lower() == "havana"
+      when: openstack_version == "havana"
 
     - name: ensure precise backport repo is present (for ovs)
       apt_repository:
         repo: ppa:lykoz/precise-backports
         state: present
         update_cache: yes
-      when: openstack_version.lower() == "havana"
+      when: openstack_version == "havana"
 
     - name: ensure grizzly repository is present
       apt_repository: 
         repo: deb http://ubuntu-cloud.archive.canonical.com/ubuntu precise-updates/grizzly main
         state: present
         update_cache: yes
-      when: openstack_version.lower() == "grizzly"
+      when: openstack_version == "grizzly"
+
+    - name: ensure required base packages are present
+      apt: 
+        pkg: "ubuntu-cloud-keyring"
+        state: latest 
+        update_cache: yes 
+        cache_valid_time: 600
 
     - name: upgrade software packages to latest version
       apt: upgrade=yes
