@@ -57,7 +57,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
       file_to_disk = '.vagrant/swift-storage-extradisk.vdi'
       v.customize ["modifyvm", :id, "--memory", 512]
       v.customize ["createhd", "--filename", file_to_disk, "--size", 1024]
-      v.customize ["storageattach", :id, "--storagectl", "SATAController", 
+      v.customize ["storageattach", :id, "--storagectl", "SATA Controller", 
                    "--port", 1, "--device", 0, "--type", "hdd", 
                    "--medium", file_to_disk]
     end
