@@ -1,6 +1,7 @@
 ---
 # set this either to grizzly or havana
 openstack_version: grizzly
+#openstack_version: havana
 
 external_ntp_host: pool.ntp.org
 
