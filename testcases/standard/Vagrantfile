@@ -19,6 +19,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     machine.vm.hostname = "controller"
     machine.vm.provider :virtualbox do |v| 
       v.customize ["modifyvm", :id, "--memory", 512]
+      v.customize ["modifyvm", :id, "--natdnshostresolver1", "on"]
     end
   end
 
@@ -30,6 +31,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     machine.vm.hostname = "compute"
     machine.vm.provider :virtualbox do |v| 
       v.customize ["modifyvm", :id, "--memory", 1024]
+      v.customize ["modifyvm", :id, "--natdnshostresolver1", "on"]
     end
   end
 
@@ -44,6 +46,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     machine.vm.provider :virtualbox do |v| 
       v.customize ["modifyvm", :id, "--memory", 512]
       v.customize ["modifyvm", :id, "--nicpromisc4", "allow-vms"]
+      v.customize ["modifyvm", :id, "--natdnshostresolver1", "on"]
     end
   end
 
@@ -57,6 +60,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
       file_to_disk = '.vagrant/swift-storage-extradisk.vdi'
       v.customize ["modifyvm", :id, "--memory", 512]
       v.customize ["createhd", "--filename", file_to_disk, "--size", 1024]
+      v.customize ["modifyvm", :id, "--natdnshostresolver1", "on"]
       v.customize ["storageattach", :id, "--storagectl", "SATA Controller", 
                    "--port", 1, "--device", 0, "--type", "hdd", 
                    "--medium", file_to_disk]

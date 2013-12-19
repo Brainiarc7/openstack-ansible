@@ -6,10 +6,10 @@
   tasks:
 
     - shell: echo "I'm on grizzly"
-      when: openstack_version == "grizzly"
+      when: openstack_version.lower() == "grizzly"
 
     - shell: echo "I'm on havana"
-      when: openstack_version == "havana"
+      when: openstack_version.lower() == "havana"
 
     - name: ensure required base packages are present
       apt: 
@@ -28,21 +28,21 @@
         repo: deb http://ubuntu-cloud.archive.canonical.com/ubuntu precise-updates/havana main
         state: present
         update_cache: yes
-      when: openstack_version == "havana"
+      when: openstack_version.lower() == "havana"
 
     - name: ensure precise backport repo is present (for ovs)
       apt_repository:
         repo: ppa:lykoz/precise-backports
         state: present
         update_cache: yes
-      when: openstack_version == "havana"
+      when: openstack_version.lower() == "grizzly"
 
     - name: ensure grizzly repository is present
       apt_repository: 
         repo: deb http://ubuntu-cloud.archive.canonical.com/ubuntu precise-updates/grizzly main
         state: present
         update_cache: yes
-      when: openstack_version == "grizzly"
+      when: openstack_version.lower() == "grizzly"
 
     - name: ensure required base packages are present
       apt: 
